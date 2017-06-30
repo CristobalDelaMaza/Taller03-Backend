@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class AutorApiController extends Controller
+class GeneroApiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,7 @@ class AutorApiController extends Controller
      */
     public function index()
     {
-       return Autor::all();         
+        return Genero::all();
     }
 
     /**

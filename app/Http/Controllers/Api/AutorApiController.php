@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class UsuarioApiController extends Controller
+class AutorApiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,7 @@ class UsuarioApiController extends Controller
      */
     public function index()
     {
-        return Usuario::all();
+       return Autor::all();         
     }
 
     /**

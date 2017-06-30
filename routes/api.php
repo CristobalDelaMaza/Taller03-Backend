@@ -17,13 +17,4 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
 
-
-Route::resource('generos', 'GeneroApiController');
-
-	Route::resource('usuarios', 'UsuarioApiController');
-
-	Route::resource('autor', 'AutorApiController');
-
-	Route::resource('ejemplar', 'EjemplarApiController');
-
-	Route::resource('libros', 'LibroApiController');
+	Route::resource('ejemplar', 'Api\EjemplarApiController');
