@@ -35,7 +35,15 @@ class UsuarioApiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $usuario = Usuario::create($request->all());
+        if (!isset($usuario)) { 
+            $datos = [
+            'errors' => true,
+            'msg' => 'Error al crear al usuario',];
+            $usuario = \Response::json($datos, 404);
+        }         
+        // se retorna a la ruta 
+        return $usuario;
     }
 
     /**
@@ -46,7 +54,14 @@ class UsuarioApiController extends Controller
      */
     public function show($id)
     {
-        //
+        $usuario = Usuario::find($id);
+        if (!isset($usuario)) {
+            $datos = [
+            'errors' => true,
+            'msg' => 'No se encontró al usuario = ' . $id,];
+            $usuario = \Response::json($datos, 404);
+        }
+        return $usuario;
     }
 
     /**
@@ -69,7 +84,15 @@ class UsuarioApiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $usuario = Usuario::find($id);
+        $usuario->fill($request->all());
+        $usuarioRetorno = $usuario->save();
+        if (isset($usuario)) {
+            $usuario = \Response::json($usuarioRetorno, 200);
+        } else {
+           $usuario = \Response::json(['error' => 'No se ha actualizado el usuario, intentelo nuevamente'], 404);
+        }
+        return $usuario;
     }
 
     /**
@@ -80,6 +103,12 @@ class UsuarioApiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $usuario = Usuario::find($id);
+        if ($usuario->delete()) {
+            $usuario = \Response::json(['delete' => true, 'id' => $id], 200);
+        } else {
+           $usuario = \Response::json(['error' => 'No se ha podido eliminar al usuario'], 403);
+        }
+        return $usuario;
     }
 }
